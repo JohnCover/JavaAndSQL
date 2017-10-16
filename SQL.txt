@@ -1,0 +1,39 @@
+CREATE TABLE WritingGroup(
+    WGroupName    VARCHAR(20) NOT NULL,
+    WHeadWriter   VARCHAR(20),
+    WYearFormed   DATE,
+    SUBJECT       VARCHAR(20),
+    CONSTRAINT pk_WritingGroup PRIMARY KEY (WGroupName)
+    );
+
+CREATE TABLE Publisher(
+    PPublisherName      VARCHAR(20) NOT NULL,
+    PPublisherAddress   VARCHAR(60),
+    PPublisherPhone     VARCHAR(20),
+    PPublisherEmail     VARCHAR(20),
+    CONSTRAINT pk_publisher PRIMARY KEY (PPublisherName)
+);
+
+CREATE TABLE Book(
+    WGroupName          VARCHAR(20) NOT NULL,
+    PPublisherName      VARCHAR(20) NOT NULL,
+    BookTitle           VARCHAR(20) NOT NULL,
+    YearPublished       VARCHAR(20),
+    NumberPage          VARCHAR(20),
+    CONSTRAINT pk_Book  PRIMARY KEY (WGroupName, BookTitle),
+    CONSTRAINT fk_Book  FOREIGN KEY (WGroupName)
+    REFERENCES WritingGroup (WGroupName)
+);
+
+INSERT INTO WritingGroup(WGroupName, WHeadWriter, WYearFormed, Subject)
+    VALUES ('B1', 'Jackie', '2000-02-22', 'Physics'),
+            ('Rogers', 'Labmert', '2001-04-01', 'Japanese');
+
+INSERT INTO Publisher(PPublisherName, PPublisherAddress, PPublisherPhone, PPublisherEmail)
+    VALUES ('Theater', '113 Jay way', '(714)883-2992', 'c@theather.com'),
+            ('Rays', 'Labmert st', '(612)993-4237', 'c@rays.com');
+
+
+INSERT INTO Book(BookTitle, WGroupName, PPublisherName, YearPublished, NumberPage)
+    VALUES ('The red', 'A1', 'Rays', '1999', '200'),
+            ('The Black', 'A2', 'Rays', '2009', '50');
